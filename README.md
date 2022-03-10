@@ -6,4 +6,8 @@ I wrote this script for my domain environment (meaning it will not work in your 
 [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.SecurityProtocolType]::Tls12
 iex (irm "https://raw.githubusercontent.com/nstevens1040/Forest-Wide-Windows-Update-Sequence/main/DomainWide-CheckForUpdates.ps1")
 ```
+# Command to create the scheduled task  
+```bat
+schtasks /create /RU "USERNAME" /RP "PASSWORD" /TN "ForestWidePSWindowsUpdate" /tr "%WINDIR%\System32\WindowsPowerShell\v1.0\PowerShell.exe  -noprofile -ep remotesigned -c \"[System.Net.ServicePointManager]::SecurityProtocol = [System.Net.SecurityProtocolType]::Tls12; iex (irm 'https://bit.ly/3CvKBPL')\"" /SC ONCE /ST 01:00 /SD 04/13/2022 /IT /RL HIGHEST /HRESULT
+```
 
